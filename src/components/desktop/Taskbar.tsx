@@ -132,9 +132,9 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
         </div>
       </div>
 
-      {/* Start Menu */}
+      {/* Start Menu - Removed glass effect */}
       {showStartMenu && (
-        <div className={`absolute bottom-12 left-4 w-80 h-96 rounded-lg border p-6 ${theme === 'light' ? 'bg-white border-gray-200' : theme === 'retro' ? 'bg-gray-300 border-gray-600 rounded-none' : 'bg-black/80 backdrop-blur-xl border-white/20'}`}>
+        <div className={`absolute bottom-12 left-4 w-80 h-96 rounded-lg border p-6 ${theme === 'light' ? 'bg-white border-gray-200' : theme === 'retro' ? 'bg-gray-300 border-gray-600 rounded-none' : 'bg-gray-800 border-gray-600'}`}>
           <div className="flex items-center space-x-3 mb-6">
             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold">DP</span>
@@ -158,7 +158,7 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
                   openWindow(item.type, item.title, item.type);
                   setShowStartMenu(false);
                 }}
-                className={`w-full p-3 text-left rounded-lg transition-colors ${theme === 'light' ? 'hover:bg-gray-100 text-gray-800' : theme === 'retro' ? 'hover:bg-gray-200 text-black rounded-none' : 'hover:bg-white/10 text-white'}`}
+                className={`w-full p-3 text-left rounded-lg transition-colors ${theme === 'light' ? 'hover:bg-gray-100 text-gray-800' : theme === 'retro' ? 'hover:bg-gray-200 text-black rounded-none' : 'hover:bg-gray-700 text-white'}`}
               >
                 {item.name}
               </button>

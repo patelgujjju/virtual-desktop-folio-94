@@ -14,9 +14,9 @@ const SkillsApp = () => {
       skills: [
         { name: 'Python', level: 95, description: 'Advanced expertise in AI/ML, data science, and backend development' },
         { name: 'JavaScript', level: 85, description: 'Full-stack web development, React, Node.js' },
+        { name: 'TypeScript', level: 80, description: 'Type-safe development for large-scale applications' },
+        { name: 'Java', level: 75, description: 'Enterprise applications and Spring framework' },
         { name: 'C++', level: 80, description: 'System programming and algorithm optimization' },
-        { name: 'C', level: 75, description: 'Low-level programming and embedded systems' },
-        { name: 'HTML/CSS', level: 90, description: 'Modern web development and responsive design' },
         { name: 'SQL', level: 85, description: 'Database design and complex query optimization' }
       ]
     },
@@ -26,12 +26,12 @@ const SkillsApp = () => {
       skills: [
         { name: 'TensorFlow', level: 90, description: 'Deep learning model development and deployment' },
         { name: 'PyTorch', level: 85, description: 'Neural network research and implementation' },
+        { name: 'React', level: 85, description: 'Modern frontend development with hooks and context' },
+        { name: 'Node.js', level: 80, description: 'Backend development and API creation' },
         { name: 'scikit-learn', level: 90, description: 'Machine learning algorithms and model evaluation' },
         { name: 'Pandas', level: 95, description: 'Data manipulation and analysis' },
-        { name: 'NumPy', level: 90, description: 'Numerical computing and array operations' },
-        { name: 'Flask', level: 85, description: 'RESTful API development and web services' },
-        { name: 'Express.js', level: 80, description: 'Backend development and API creation' },
-        { name: 'React', level: 75, description: 'Frontend development and component architecture' }
+        { name: 'Flask/FastAPI', level: 85, description: 'RESTful API development and web services' },
+        { name: 'Next.js', level: 75, description: 'Full-stack React applications with SSR/SSG' }
       ]
     },
     aiml: {
@@ -39,23 +39,23 @@ const SkillsApp = () => {
       icon: Brain,
       skills: [
         { name: 'Computer Vision', level: 90, description: 'Object detection, image segmentation, OpenCV' },
-        { name: 'NLP', level: 85, description: 'Text processing, sentiment analysis, language models' },
+        { name: 'Natural Language Processing', level: 85, description: 'Text processing, sentiment analysis, transformers' },
         { name: 'Deep Learning', level: 90, description: 'CNN, RNN, transformer architectures' },
-        { name: 'RAG Systems', level: 85, description: 'Retrieval-Augmented Generation pipelines' },
-        { name: 'Model Fine-tuning', level: 80, description: 'Transfer learning and model optimization' },
-        { name: 'YOLOv3', level: 85, description: 'Real-time object detection implementation' }
+        { name: 'Large Language Models', level: 80, description: 'GPT, BERT, fine-tuning and prompt engineering' },
+        { name: 'MLOps', level: 75, description: 'Model deployment, monitoring, and versioning' },
+        { name: 'Generative AI', level: 85, description: 'GANs, VAEs, diffusion models' }
       ]
     },
     tools: {
       title: 'Tools & Platforms',
       icon: Database,
       skills: [
+        { name: 'Docker', level: 80, description: 'Containerization and deployment' },
+        { name: 'AWS/GCP', level: 75, description: 'Cloud computing and ML services' },
         { name: 'Git/GitHub', level: 90, description: 'Version control and collaborative development' },
-        { name: 'MySQL', level: 85, description: 'Database design and administration' },
-        { name: 'Tableau', level: 80, description: 'Data visualization and business intelligence' },
-        { name: 'Jupyter Notebook', level: 95, description: 'Interactive data science and prototyping' },
-        { name: 'Anaconda', level: 90, description: 'Environment management and package distribution' },
-        { name: 'Postman', level: 80, description: 'API testing and documentation' }
+        { name: 'MongoDB/PostgreSQL', level: 85, description: 'Database design and administration' },
+        { name: 'Kubernetes', level: 70, description: 'Container orchestration and scaling' },
+        { name: 'Jupyter/Colab', level: 95, description: 'Interactive data science and prototyping' }
       ]
     }
   };

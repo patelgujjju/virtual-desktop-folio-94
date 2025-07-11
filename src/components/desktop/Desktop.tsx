@@ -39,11 +39,11 @@ const Desktop = () => {
   return (
     <WindowManagerProvider>
       <div className={`h-screen ${getDesktopBackground()} relative overflow-hidden ${theme === 'retro' ? 'pixelated' : ''}`}>
-        {/* Background Image */}
+        {/* Background Image - Using a dark forest/nature image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: `url('/lovable-uploads/834ec5d8-978e-4c19-9098-7666d0839906.png')`
+            backgroundImage: `url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2560&q=80')`
           }}
         />
         

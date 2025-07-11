@@ -29,8 +29,7 @@ const ThisPCApp = ({ theme }: ThisPCAppProps) => {
       content: [
         { name: 'AI Research Papers', type: 'folder', description: 'Collection of AI/ML research papers' },
         { name: 'Project Documentation', type: 'folder', description: 'Technical documentation for projects' },
-        { name: 'Internship Reports', type: 'folder', description: 'Reports from AI/ML internships' },
-        { name: 'Academic Transcripts', type: 'file', description: 'University transcripts and grades' }
+        { name: 'Internship Reports', type: 'folder', description: 'Reports from AI/ML internships' }
       ]
     },
     { 
@@ -44,23 +43,12 @@ const ThisPCApp = ({ theme }: ThisPCAppProps) => {
       ]
     },
     { 
-      name: 'Videos', 
-      icon: Video, 
-      size: '23 items',
-      content: [
-        { name: 'Project Demos', type: 'folder', description: 'Video demonstrations of projects' },
-        { name: 'Tech Tutorials', type: 'folder', description: 'Educational programming content' },
-        { name: 'Conference Recordings', type: 'folder', description: 'Recorded tech talks and presentations' }
-      ]
-    },
-    { 
       name: 'Code', 
       icon: Folder, 
       size: '89 items',
       content: [
         { name: 'Personal Projects', type: 'folder', description: 'Source code for personal projects' },
         { name: 'Learning Exercises', type: 'folder', description: 'Practice code and tutorials' },
-        { name: 'Open Source Contributions', type: 'folder', description: 'Contributions to open source projects' },
         { name: 'Scripts and Tools', type: 'folder', description: 'Utility scripts and automation tools' }
       ]
     }
@@ -152,24 +140,16 @@ const ThisPCApp = ({ theme }: ThisPCAppProps) => {
               <p>DHRUVIN-PC</p>
             </div>
             <div>
-              <p className="font-medium">Processor:</p>
-              <p>Intel(R) Core(TM) i7-10750H</p>
-            </div>
-            <div>
-              <p className="font-medium">Installed RAM:</p>
-              <p>16.0 GB</p>
-            </div>
-            <div>
-              <p className="font-medium">System Type:</p>
-              <p>64-bit Operating System</p>
-            </div>
-            <div>
               <p className="font-medium">Owner:</p>
               <p>Dhruvinkumar Patel</p>
             </div>
             <div>
               <p className="font-medium">Location:</p>
-              <p>Pune, Maharashtra, India</p>
+              <p>Pune, India</p>
+            </div>
+            <div>
+              <p className="font-medium">System Type:</p>
+              <p>64-bit Operating System</p>
             </div>
           </div>
         </div>
@@ -190,20 +170,8 @@ const ThisPCApp = ({ theme }: ThisPCAppProps) => {
               <span>Tailwind CSS</span>
             </div>
             <div className="flex justify-between">
-              <span className="font-medium">Icons:</span>
-              <span>Lucide React</span>
-            </div>
-            <div className="flex justify-between">
               <span className="font-medium">UI Components:</span>
               <span>Shadcn/UI</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-medium">Build Tool:</span>
-              <span>Vite</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="font-medium">State Management:</span>
-              <span>React Context API</span>
             </div>
           </div>
           <div className="mt-4 pt-3 border-t">

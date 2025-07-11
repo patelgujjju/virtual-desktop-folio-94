@@ -12,6 +12,7 @@ import BrowserApp from '../apps/BrowserApp';
 import ExplorerApp from '../apps/ExplorerApp';
 import ThisPCApp from '../apps/ThisPCApp';
 import RecycleBinApp from '../apps/RecycleBinApp';
+import PicturesApp from '../apps/PicturesApp';
 
 interface WindowManagerProps {
   theme: 'light' | 'dark' | 'retro';
@@ -42,6 +43,8 @@ const WindowManager = ({ theme }: WindowManagerProps) => {
         return <ThisPCApp theme={theme} />;
       case 'recycle-bin':
         return <RecycleBinApp theme={theme} />;
+      case 'pictures':
+        return <PicturesApp />;
       case 'swiftwheels':
         return (
           <div className="w-full h-full bg-white">

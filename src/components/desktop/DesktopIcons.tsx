@@ -15,7 +15,8 @@ import {
   Shield,
   Bot,
   Github,
-  Linkedin
+  Linkedin,
+  Image
 } from 'lucide-react';
 import DesktopIcon from './DesktopIcon';
 import { useWindowManager } from '../../contexts/WindowManagerContext';
@@ -36,13 +37,14 @@ const DesktopIcons = ({ theme }: DesktopIconsProps) => {
     'skills': { x: 50, y: 380 },
     'certificates': { x: 180, y: 80 },
     'resume': { x: 180, y: 180 },
-    'terminal': { x: 180, y: 280 },
-    'browser': { x: 180, y: 380 },
-    'recycle-bin': { x: 310, y: 80 },
-    'swiftwheels': { x: 310, y: 180 },
-    'ai-object-detection': { x: 310, y: 280 },
-    'deepfake-detection': { x: 310, y: 380 },
-    'rag-system': { x: 440, y: 80 }
+    'pictures': { x: 180, y: 280 },
+    'terminal': { x: 180, y: 380 },
+    'browser': { x: 310, y: 80 },
+    'recycle-bin': { x: 310, y: 180 },
+    'swiftwheels': { x: 310, y: 280 },
+    'ai-object-detection': { x: 310, y: 380 },
+    'deepfake-detection': { x: 440, y: 80 },
+    'rag-system': { x: 440, y: 180 }
   };
 
   useEffect(() => {
@@ -96,6 +98,12 @@ const DesktopIcons = ({ theme }: DesktopIconsProps) => {
       name: 'Resume',
       icon: FileText,
       onClick: () => openWindow('resume', 'Resume Viewer', 'resume')
+    },
+    {
+      id: 'pictures',
+      name: 'Pictures',
+      icon: Image,
+      onClick: () => openWindow('pictures', 'Pictures Gallery', 'pictures')
     },
     {
       id: 'terminal',

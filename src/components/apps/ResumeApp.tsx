@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Download, Eye, Share2, Printer, ExternalLink, Mail, Phone, MapPin, Github, Linkedin } from 'lucide-react';
+import { Download, Eye, Printer, ExternalLink, Mail, Phone, MapPin, Github, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -8,11 +7,84 @@ const ResumeApp = () => {
   const [viewMode, setViewMode] = useState<'preview' | 'fullscreen'>('preview');
 
   const handleDownload = () => {
-    console.log('Downloading resume...');
+    // Create a new window with the resume content for printing/saving as PDF
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Dhruvinkumar Patel - Resume</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+            .resume-header { background: linear-gradient(135deg, #2563eb, #4f46e5); color: white; padding: 30px; margin-bottom: 20px; }
+            .section { margin-bottom: 25px; }
+            .section-title { font-size: 18px; font-weight: bold; border-bottom: 2px solid #2563eb; padding-bottom: 5px; margin-bottom: 15px; }
+            .experience-item { background: #f8f9fa; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
+            .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+            .skill-item { background: #f1f5f9; padding: 10px; border-radius: 5px; }
+            @media print { body { margin: 0; } .no-print { display: none; } }
+          </style>
+        </head>
+        <body>
+          <div class="resume-header">
+            <h1>Dhruvinkumar Patel</h1>
+            <p style="font-size: 20px; margin: 10px 0;">AI/ML Engineer | Full Stack Developer</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; font-size: 14px;">
+              <span>📧 dhruvin5134@gmail.com</span>
+              <span>📱 +91 9537428629</span>
+              <span>📍 Pune, India</span>
+              <span>💼 linkedin.com/in/dhruvinkumarpatel</span>
+              <span>🔗 github.com/dhruvinhet</span>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-title">Professional Summary</div>
+            <p>Passionate AI/ML Engineer with hands-on experience in developing intelligent systems, computer vision applications, and full-stack web solutions. Proven track record of building end-to-end projects from conception to deployment with expertise in Python, TensorFlow, and modern web technologies. Strong foundation in data science with 2+ internship experiences and 5+ deployed AI/ML projects.</p>
+          </div>
+          <div class="section">
+            <div class="section-title">Education</div>
+            <div class="experience-item">
+              <h3>Bachelor of Engineering - Computer Engineering</h3>
+              <p><strong>Pune University</strong> | 2020 - 2024 | CGPA: 8.5/10</p>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-title">Technical Skills</div>
+            <div class="skills-grid">
+              <div class="skill-item"><strong>Languages:</strong> Python, JavaScript, TypeScript, Java, C++</div>
+              <div class="skill-item"><strong>AI/ML:</strong> TensorFlow, PyTorch, Scikit-learn, OpenCV</div>
+              <div class="skill-item"><strong>Web:</strong> React, Node.js, Express.js, MongoDB</div>
+              <div class="skill-item"><strong>Tools:</strong> Docker, AWS, Git, Kubernetes</div>
+            </div>
+          </div>
+        </body>
+        </html>
+      `);
+      printWindow.document.close();
+      printWindow.focus();
+      
+      // Trigger print dialog
+      setTimeout(() => {
+        printWindow.print();
+      }, 100);
+    }
   };
 
-  const handleShare = () => {
-    console.log('Sharing resume...');
+  const handleFullscreen = () => {
+    if (viewMode === 'preview') {
+      setViewMode('fullscreen');
+      // Request fullscreen
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+    } else {
+      setViewMode('preview');
+      // Exit fullscreen
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
   };
 
   const handlePrint = () => {
@@ -32,14 +104,10 @@ const ResumeApp = () => {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setViewMode(viewMode === 'preview' ? 'fullscreen' : 'preview')}
+              onClick={handleFullscreen}
             >
               <Eye className="w-4 h-4 mr-2" />
-              {viewMode === 'preview' ? 'Full Screen' : 'Preview'}
-            </Button>
-            <Button variant="outline" size="sm" onClick={handleShare}>
-              <Share2 className="w-4 h-4 mr-2" />
-              Share
+              {viewMode === 'preview' ? 'Full Screen' : 'Exit Fullscreen'}
             </Button>
             <Button variant="outline" size="sm" onClick={handlePrint}>
               <Printer className="w-4 h-4 mr-2" />
@@ -397,15 +465,30 @@ const ResumeApp = () => {
             <CardContent className="p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Links</h3>
               <div className="space-y-2">
-                <Button variant="outline" size="sm" className="w-full justify-start">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full justify-start"
+                  onClick={() => window.open('https://linkedin.com/in/dhruvinkumarpatel', '_blank')}
+                >
                   <ExternalLink className="w-4 h-4 mr-2" />
                   LinkedIn Profile
                 </Button>
-                <Button variant="outline" size="sm" className="w-full justify-start">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full justify-start"
+                  onClick={() => window.open('https://github.com/dhruvinhet', '_blank')}
+                >
                   <ExternalLink className="w-4 h-4 mr-2" />
                   GitHub Profile
                 </Button>
-                <Button variant="outline" size="sm" className="w-full justify-start">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="w-full justify-start"
+                  onClick={() => window.open('https://dhruvinkumarpatel.netlify.app/', '_blank')}
+                >
                   <ExternalLink className="w-4 h-4 mr-2" />
                   Portfolio Website
                 </Button>
@@ -429,7 +512,17 @@ const ResumeApp = () => {
                 ].map((section, idx) => (
                   <div key={idx} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
                     <span className="text-sm text-gray-700">{section}</span>
-                    <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="text-blue-600 hover:text-blue-700"
+                      onClick={() => {
+                        const element = document.querySelector(`h2:contains("${section}")`);
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                    >
                       <Eye className="w-3 h-3" />
                     </Button>
                   </div>
