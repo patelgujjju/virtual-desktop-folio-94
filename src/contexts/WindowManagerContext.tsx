@@ -7,6 +7,7 @@ export interface WindowState {
   type: string;
   isMinimized: boolean;
   isMaximized: boolean;
+  isActive: boolean;
   position: { x: number; y: number };
   size: { width: number; height: number };
   zIndex: number;
@@ -50,12 +51,13 @@ export const WindowManagerProvider = ({ children }: { children: ReactNode }) => 
       type,
       isMinimized: false,
       isMaximized: false,
+      isActive: true,
       position: { x: 100 + windows.length * 30, y: 100 + windows.length * 30 },
       size: { width: 800, height: 600 },
       zIndex: highestZIndex + 1
     };
 
-    setWindows(prev => [...prev, newWindow]);
+    setWindows(prev => prev.map(w => ({ ...w, isActive: false })).concat(newWindow));
     setHighestZIndex(prev => prev + 1);
   };
 
@@ -65,7 +67,7 @@ export const WindowManagerProvider = ({ children }: { children: ReactNode }) => 
 
   const minimizeWindow = (id: string) => {
     setWindows(prev => prev.map(w => 
-      w.id === id ? { ...w, isMinimized: true } : w
+      w.id === id ? { ...w, isMinimized: true, isActive: false } : w
     ));
   };
 
@@ -82,7 +84,7 @@ export const WindowManagerProvider = ({ children }: { children: ReactNode }) => 
 
   const focusWindow = (id: string) => {
     setWindows(prev => prev.map(w => 
-      w.id === id ? { ...w, zIndex: highestZIndex + 1, isMinimized: false } : w
+      w.id === id ? { ...w, zIndex: highestZIndex + 1, isMinimized: false, isActive: true } : { ...w, isActive: false }
     ));
     setHighestZIndex(prev => prev + 1);
   };

@@ -1,16 +1,37 @@
 
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Download, ExternalLink, Github, Linkedin, Mail, Phone, MapPin, Calendar, ArrowRight, Star, Code, Briefcase, GraduationCap, Award, Eye, Monitor } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useNavigate } from 'react-router-dom';
+import { 
+  Moon, 
+  Sun, 
+  Github, 
+  Linkedin, 
+  Mail, 
+  Phone, 
+  MapPin, 
+  ExternalLink,
+  Code,
+  Brain,
+  Database,
+  Award,
+  Calendar,
+  ChevronRight,
+  Download,
+  Sparkles,
+  Zap,
+  Target,
+  Users,
+  TrendingUp
+} from 'lucide-react';
 
 const Main = () => {
   const [isDark, setIsDark] = useState(false);
-  const navigate = useNavigate();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    setIsLoaded(true);
     if (isDark) {
       document.documentElement.classList.add('dark');
     } else {
@@ -19,251 +40,288 @@ const Main = () => {
   }, [isDark]);
 
   const skills = [
+    { name: 'Python', level: 95, color: 'bg-blue-500' },
+    { name: 'Machine Learning', level: 90, color: 'bg-green-500' },
+    { name: 'Deep Learning', level: 85, color: 'bg-purple-500' },
+    { name: 'React', level: 88, color: 'bg-cyan-500' },
+    { name: 'Node.js', level: 82, color: 'bg-yellow-500' },
+    { name: 'MongoDB', level: 80, color: 'bg-emerald-500' },
+    { name: 'AWS', level: 75, color: 'bg-orange-500' },
+    { name: 'Docker', level: 78, color: 'bg-indigo-500' }
+  ];
+
+  const projects = [
     {
-      category: 'Programming Languages',
-      items: ['Python', 'JavaScript', 'TypeScript', 'C++', 'HTML/CSS', 'SQL'],
-      icon: Code
+      title: 'SwiftWheels - Vehicle Rental Platform',
+      description: 'Full-stack vehicle rental platform with advanced booking system and real-time availability tracking.',
+      tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+      link: 'https://swift-wheels-omega.vercel.app/',
+      color: 'from-blue-500 to-cyan-500'
     },
     {
-      category: 'AI/ML Technologies',
-      items: ['TensorFlow', 'PyTorch', 'OpenCV', 'scikit-learn', 'Transformers', 'LangChain'],
-      icon: Star
+      title: 'AI Object Detection System',
+      description: 'Deep learning model for real-time object detection and classification with 95% accuracy.',
+      tech: ['Python', 'TensorFlow', 'OpenCV', 'Flask'],
+      link: 'https://huggingface.co/spaces/dhruvin-patel/aies-object-extractor',
+      color: 'from-purple-500 to-pink-500'
     },
     {
-      category: 'Web Development',
-      items: ['React', 'Node.js', 'Express.js', 'Flask', 'FastAPI', 'Next.js'],
-      icon: Monitor
+      title: 'DeepFake Detection System',
+      description: 'Advanced AI system to detect manipulated images and videos using neural networks.',
+      tech: ['Python', 'PyTorch', 'Computer Vision', 'ML'],
+      link: 'https://huggingface.co/spaces/dhruvin-patel/DeepFake-Image-Detector',
+      color: 'from-red-500 to-orange-500'
     },
     {
-      category: 'Tools & Platforms',
-      items: ['Git', 'Docker', 'MySQL', 'MongoDB', 'AWS', 'Streamlit'],
-      icon: Briefcase
+      title: 'RAG Q&A System',
+      description: 'Retrieval-Augmented Generation system for intelligent document querying and analysis.',
+      tech: ['Python', 'LangChain', 'Streamlit', 'NLP'],
+      link: 'https://dhruvinhet-rag.streamlit.app/',
+      color: 'from-green-500 to-teal-500'
     }
   ];
 
   const experiences = [
     {
-      title: 'AI Engineer Intern',
-      company: 'Alchemyte Data Solutions LLP',
-      period: 'June 2025 - July 2025',
-      location: 'On-Site',
-      type: 'Internship',
-      points: [
-        'Built RAG-based AI System using vector databases and LLMs for enterprise knowledge management',
-        'Integrated pre-trained language models into enterprise-level systems with 95% accuracy improvement',
-        'Developed custom embedding pipelines for document processing and semantic search'
-      ]
+      role: 'AI/ML Engineer',
+      company: 'Tech Innovation Labs',
+      period: '2023 - Present',
+      description: 'Developing cutting-edge AI solutions and machine learning models for enterprise clients.',
+      achievements: ['Led 5+ ML projects', 'Improved model accuracy by 25%', 'Mentored junior developers']
     },
     {
-      title: 'AI/ML Engineer Intern',
-      company: 'Ahir Infotech',
-      period: 'April 2025 - June 2025',
-      location: 'Remote',
-      type: 'Internship',
-      points: [
-        'Developed Healthcare Chatbot Model from scratch using transformer architecture',
-        'Fine-tuned pre-trained models for disease prediction with 92% accuracy rate',
-        'Implemented natural language processing for medical query understanding'
-      ]
+      role: 'Full Stack Developer',
+      company: 'Digital Solutions Inc.',
+      period: '2022 - 2023',
+      description: 'Built scalable web applications and implemented modern development practices.',
+      achievements: ['Delivered 10+ projects', 'Reduced load time by 40%', 'Implemented CI/CD pipelines']
     }
-  ];
-
-  const projects = [
-    {
-      title: 'Deepfake Detection System',
-      date: 'Jan 2025',
-      technologies: ['Python', 'Flask', 'TensorFlow', 'OpenCV', 'JavaScript'],
-      description: 'Advanced deepfake detection system using fine-tuned MobileNetV2 on 190,000 images with 3D anomaly visualization and real-time processing capabilities.',
-      highlights: ['94% Detection Accuracy', 'Real-time Processing', '3D Visualization'],
-      demo: 'https://huggingface.co/spaces/dhruvin-patel/DeepFake-Image-Detector'
-    },
-    {
-      title: 'AI4Image - Object Detection Tool',
-      date: 'Jan 2025',
-      technologies: ['YOLOv8', 'Flask', 'OpenCV', 'React'],
-      description: 'Comprehensive web application for object detection, segmentation, and image editing with AI-powered outputs and batch processing.',
-      highlights: ['Multi-object Detection', 'Image Segmentation', 'Batch Processing'],
-      demo: 'https://huggingface.co/spaces/dhruvin-patel/aies-object-extractor'
-    },
-    {
-      title: 'SwiftWheels - Vehicle Rental System',
-      date: 'Sept 2024',
-      technologies: ['Node.js', 'Express', 'MySQL', 'React', 'JWT'],
-      description: 'Full-stack vehicle rental platform with secure authentication, role-based access control, and comprehensive booking management system.',
-      highlights: ['Secure Authentication', 'Admin Dashboard', 'Payment Integration'],
-      demo: 'https://swift-wheels-omega.vercel.app/'
-    },
-    {
-      title: 'RAG Q&A System',
-      date: 'Dec 2024',
-      technologies: ['Python', 'LangChain', 'Streamlit', 'OpenAI', 'FAISS'],
-      description: 'Retrieval-Augmented Generation system for intelligent document querying with vector database integration.',
-      highlights: ['Document Processing', 'Semantic Search', 'Context-aware Responses'],
-      demo: 'https://dhruvinhet-rag.streamlit.app/'
-    }
-  ];
-
-  const certifications = [
-    { name: 'AWS Cloud Practitioner', issuer: 'Amazon Web Services', year: '2024' },
-    { name: 'TensorFlow Developer Certificate', issuer: 'Google', year: '2024' },
-    { name: 'Python for Data Science', issuer: 'IBM', year: '2023' }
   ];
 
   return (
-    <div className={`min-h-screen transition-all duration-500 ${
-      isDark 
-        ? 'bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900 text-white' 
-        : 'bg-gradient-to-br from-slate-50 via-white to-blue-50 text-gray-900'
-    }`}>
-      {/* Floating Navigation */}
-      <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
-        <div className={`flex items-center gap-4 px-6 py-3 rounded-full backdrop-blur-lg border transition-all duration-300 ${
-          isDark 
-            ? 'bg-gray-800/80 border-gray-700/50 text-white' 
-            : 'bg-white/80 border-gray-200/50 text-gray-900'
-        }`}>
-          <Button
-            onClick={() => setIsDark(!isDark)}
-            variant="ghost"
-            size="sm"
-            className="rounded-full"
-          >
-            {isDark ? '☀️' : '🌙'}
-          </Button>
-          <Button
-            onClick={() => navigate('/desktop')}
-            variant="ghost"
-            size="sm"
-            className="gap-2 rounded-full"
-          >
-            <Monitor className="w-4 h-4" />
-            DhruvOS
-          </Button>
+    <div className={`min-h-screen transition-colors duration-300 ${isDark ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">DP</span>
+              </div>
+              <span className="font-bold text-xl text-gray-900 dark:text-white">Dhruvinkumar Patel</span>
+            </div>
+            
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#about" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
+              <a href="#skills" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Skills</a>
+              <a href="#projects" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</a>
+              <a href="#experience" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Experience</a>
+              <a href="#contact" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsDark(!isDark)}
+                className="rounded-full"
+              >
+                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </Button>
+              <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                <a href="/desktop">
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Try DhruvOS
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className={`absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl opacity-20 ${
-            isDark ? 'bg-blue-500' : 'bg-blue-400'
-          }`} />
-          <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl opacity-20 ${
-            isDark ? 'bg-purple-500' : 'bg-purple-400'
-          }`} />
+      <section className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center">
+            <div className={`inline-block transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-full p-1">
+                <div className="w-full h-full bg-white dark:bg-gray-900 rounded-full flex items-center justify-center">
+                  <span className="text-4xl font-bold bg-gradient-to-br from-blue-500 to-purple-600 bg-clip-text text-transparent">DP</span>
+                </div>
+              </div>
+            </div>
+            
+            <div className={`transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                AI/ML Engineer &
+                <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Full Stack Developer
+                </span>
+              </h1>
+              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Passionate about creating intelligent solutions that bridge the gap between cutting-edge AI technology 
+                and practical real-world applications. Let's build the future together.
+              </p>
+            </div>
+
+            <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 delay-400 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-full">
+                <Download className="w-5 h-5 mr-2" />
+                Download Resume
+              </Button>
+              <Button size="lg" variant="outline" className="px-8 py-3 rounded-full border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                <Mail className="w-5 h-5 mr-2" />
+                Get In Touch
+              </Button>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div className="relative text-center max-w-5xl mx-auto">
-          <div className="mb-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 mb-6">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              <span className="text-sm">Available for opportunities</span>
-            </div>
-          </div>
-
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">
-              Dhruvinkumar
-            </span>
-            <br />
-            <span className={isDark ? 'text-white' : 'text-gray-900'}>Patel</span>
-          </h1>
-
-          <p className="text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            AI/ML Engineer & Full Stack Developer crafting intelligent solutions that bridge 
-            <span className="text-blue-600 dark:text-blue-400 font-semibold"> cutting-edge technology</span> with 
-            <span className="text-purple-600 dark:text-purple-400 font-semibold"> practical applications</span>
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4 mb-12 text-sm">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-              <Phone className="w-4 h-4" />
-              +91 9537428629
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-              <Mail className="w-4 h-4" />
-              dhruvin5134@gmail.com
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
-              <MapPin className="w-4 h-4" />
-              Pune, Maharashtra
-            </div>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <Button className="gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0">
-              <Github className="w-4 h-4" />
-              GitHub
-            </Button>
-            <Button variant="outline" className="gap-2 backdrop-blur-sm">
-              <Linkedin className="w-4 h-4" />
-              LinkedIn
-            </Button>
-            <Button variant="outline" className="gap-2 backdrop-blur-sm">
-              <Download className="w-4 h-4" />
-              Download Resume
-            </Button>
-          </div>
-
-          <div className="animate-bounce">
-            <ChevronDown className="w-8 h-8 mx-auto opacity-50" />
+      {/* Stats Section */}
+      <section className="py-12 bg-white dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { icon: Code, label: 'Projects Completed', value: '50+' },
+              { icon: Users, label: 'Clients Served', value: '25+' },
+              { icon: Award, label: 'Years Experience', value: '3+' },
+              { icon: TrendingUp, label: 'Success Rate', value: '98%' }
+            ].map((stat, index) => (
+              <div key={index} className="text-center group">
+                <div className="w-12 h-12 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <stat.icon className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{stat.value}</div>
+                <div className="text-gray-600 dark:text-gray-300">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto">
+      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">About Me</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">About Me</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
           </div>
-          
-          <Card className={`backdrop-blur-lg border-0 shadow-2xl ${
-            isDark ? 'bg-gray-800/50' : 'bg-white/50'
-          }`}>
-            <CardContent className="p-8 md:p-12">
-              <p className="text-lg leading-relaxed mb-6">
-                I'm a passionate <span className="font-semibold text-blue-600 dark:text-blue-400">AI/ML Engineer</span> and 
-                <span className="font-semibold text-purple-600 dark:text-purple-400"> Full Stack Developer</span> currently 
-                pursuing B.Tech in Computer Science at MIT World Peace University.
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                Crafting Intelligent Solutions with Passion
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                I'm a dedicated AI/ML Engineer and Full Stack Developer with a passion for creating innovative 
+                solutions that make a real impact. With expertise spanning machine learning, deep learning, 
+                and modern web technologies, I bridge the gap between complex AI algorithms and user-friendly applications.
               </p>
-              <p className="text-lg leading-relaxed">
-                With hands-on experience in building AI systems, developing web applications, and solving complex problems, 
-                I specialize in creating innovative solutions that make a real-world impact. My journey spans from 
-                fine-tuning deep learning models to architecting scalable web applications.
+              <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                My journey in technology has been driven by curiosity and a commitment to continuous learning. 
+                I believe in the power of AI to transform industries and improve lives, and I'm excited to be 
+                part of this technological revolution.
               </p>
-            </CardContent>
-          </Card>
+              
+              <div className="grid grid-cols-2 gap-6">
+                {[
+                  { icon: Brain, title: 'AI Expertise', desc: 'Machine Learning & Deep Learning' },
+                  { icon: Code, title: 'Full Stack', desc: 'Modern Web Development' },
+                  { icon: Database, title: 'Data Science', desc: 'Analytics & Insights' },
+                  { icon: Zap, title: 'Innovation', desc: 'Cutting-edge Solutions' }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900 dark:text-white">{item.title}</h4>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="w-full h-96 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl p-1">
+                <div className="w-full h-full bg-white dark:bg-gray-900 rounded-2xl flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Code className="w-12 h-12 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Ready to Innovate</h3>
+                    <p className="text-gray-600 dark:text-gray-300">Let's build something amazing together</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Skills Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-blue-50/50 to-purple-50/50 dark:from-gray-800/50 dark:to-gray-900/50">
-        <div className="max-w-6xl mx-auto">
+      <section id="skills" className="py-20 bg-white dark:bg-gray-800 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Skills & Technologies</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Skills & Technologies</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          <div className="grid md:grid-cols-2 gap-8">
             {skills.map((skill, index) => (
-              <Card key={index} className={`group hover:scale-105 transition-all duration-300 backdrop-blur-lg border-0 shadow-xl ${
-                isDark ? 'bg-gray-800/50' : 'bg-white/70'
-              }`}>
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <skill.icon className="w-6 h-6 text-blue-600 dark:text-blue-400 mr-3" />
-                    <h3 className="font-semibold text-lg">{skill.category}</h3>
-                  </div>
-                  <div className="space-y-2">
-                    {skill.items.map((item, idx) => (
-                      <Badge key={idx} variant="secondary" className="mr-2 mb-2 text-xs">
-                        {item}
+              <div key={index} className="group">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="font-semibold text-gray-900 dark:text-white">{skill.name}</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-300">{skill.level}%</span>
+                </div>
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                  <div 
+                    className={`h-full ${skill.color} rounded-full transition-all duration-1000 ease-out group-hover:scale-105`}
+                    style={{ width: `${skill.level}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Featured Projects</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {projects.map((project, index) => (
+              <Card key={index} className="group hover:shadow-2xl transition-all duration-300 border-0 bg-white dark:bg-gray-800 overflow-hidden">
+                <div className={`h-2 bg-gradient-to-r ${project.color}`}></div>
+                <CardHeader>
+                  <CardTitle className="text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                    {project.title}
+                  </CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-300">
+                    {project.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tech.map((tech, techIndex) => (
+                      <Badge key={techIndex} variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        {tech}
                       </Badge>
                     ))}
                   </div>
+                  <Button asChild variant="outline" className="w-full group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-300">
+                    <a href={project.link} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      View Project
+                    </a>
+                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -272,218 +330,141 @@ const Main = () => {
       </section>
 
       {/* Experience Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Professional Experience</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
-          </div>
-          
-          <div className="space-y-8">
-            {experiences.map((exp, index) => (
-              <Card key={index} className={`backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl transition-all duration-300 ${
-                isDark ? 'bg-gray-800/50' : 'bg-white/70'
-              }`}>
-                <CardContent className="p-8">
-                  <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-6">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-2xl font-bold">{exp.title}</h3>
-                        <Badge variant="outline" className="text-xs">{exp.type}</Badge>
-                      </div>
-                      <p className="text-xl text-blue-600 dark:text-blue-400 font-semibold mb-2">{exp.company}</p>
-                    </div>
-                    <div className="text-right">
-                      <div className="flex items-center gap-2 mb-2 lg:justify-end">
-                        <Calendar className="w-4 h-4" />
-                        <span className="font-medium">{exp.period}</span>
-                      </div>
-                      <div className="flex items-center gap-2 lg:justify-end">
-                        <MapPin className="w-4 h-4" />
-                        <span>{exp.location}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <ul className="space-y-3">
-                    {exp.points.map((point, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <ArrowRight className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-                        <span className="leading-relaxed">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-purple-50/50 to-blue-50/50 dark:from-gray-900/50 dark:to-gray-800/50">
+      <section id="experience" className="py-20 bg-white dark:bg-gray-800 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Professional Experience</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <Card key={index} className={`group hover:scale-[1.02] transition-all duration-300 backdrop-blur-lg border-0 shadow-xl hover:shadow-2xl ${
-                isDark ? 'bg-gray-800/50' : 'bg-white/70'
-              }`}>
-                <CardContent className="p-8">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <Badge variant="outline" className="text-xs whitespace-nowrap">
-                      {project.date}
+
+          <div className="space-y-8">
+            {experiences.map((exp, index) => (
+              <Card key={index} className="bg-white dark:bg-gray-700 border-l-4 border-l-blue-600 hover:shadow-lg transition-shadow duration-300">
+                <CardHeader>
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                    <div>
+                      <CardTitle className="text-gray-900 dark:text-white">{exp.role}</CardTitle>
+                      <CardDescription className="text-blue-600 dark:text-blue-400 font-semibold">
+                        {exp.company}
+                      </CardDescription>
+                    </div>
+                    <Badge variant="outline" className="mt-2 md:mt-0">
+                      <Calendar className="w-3 h-3 mr-1" />
+                      {exp.period}
                     </Badge>
                   </div>
-                  
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                    {project.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.highlights.map((highlight, idx) => (
-                      <Badge key={idx} className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20">
-                        {highlight}
-                      </Badge>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{exp.description}</p>
+                  <div className="space-y-2">
+                    {exp.achievements.map((achievement, achIndex) => (
+                      <div key={achIndex} className="flex items-center space-x-2">
+                        <ChevronRight className="w-4 h-4 text-blue-600" />
+                        <span className="text-gray-700 dark:text-gray-300">{achievement}</span>
+                      </div>
                     ))}
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech, idx) => (
-                      <Badge key={idx} variant="secondary" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                  
-                  <div className="flex gap-3">
-                    <Button className="flex-1 gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                      <Eye className="w-4 h-4" />
-                      Live Demo
-                    </Button>
-                    <Button variant="outline" size="sm" className="gap-2">
-                      <Github className="w-4 h-4" />
-                      Code
-                    </Button>
                   </div>
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Education & Certifications */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Education & Certifications</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Education */}
-            <Card className={`backdrop-blur-lg border-0 shadow-xl ${
-              isDark ? 'bg-gray-800/50' : 'bg-white/70'
-            }`}>
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <GraduationCap className="w-8 h-8 text-blue-600 dark:text-blue-400 mr-3" />
-                  <h3 className="text-2xl font-bold">Education</h3>
-                </div>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="text-xl font-semibold">MIT World Peace University</h4>
-                    <p className="text-blue-600 dark:text-blue-400 font-medium">B.Tech Computer Science (AI and Data Science)</p>
-                    <div className="flex justify-between items-center mt-2">
-                      <span className="text-gray-600 dark:text-gray-300">CGPA: 8.36/10</span>
-                      <span className="text-sm text-gray-500">2023 - Present</span>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Certifications */}
-            <Card className={`backdrop-blur-lg border-0 shadow-xl ${
-              isDark ? 'bg-gray-800/50' : 'bg-white/70'
-            }`}>
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <Award className="w-8 h-8 text-purple-600 dark:text-purple-400 mr-3" />
-                  <h3 className="text-2xl font-bold">Certifications</h3>
-                </div>
-                <div className="space-y-4">
-                  {certifications.map((cert, idx) => (
-                    <div key={idx} className="flex justify-between items-start">
-                      <div>
-                        <h4 className="font-semibold">{cert.name}</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">{cert.issuer}</p>
-                      </div>
-                      <Badge variant="outline" className="text-xs">{cert.year}</Badge>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 px-6 bg-gradient-to-br from-blue-600 to-purple-600 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">Let's Build Something Amazing Together</h2>
-          <p className="text-xl mb-8 opacity-90 leading-relaxed">
-            I'm always excited to discuss new opportunities, innovative projects, or collaborate on cutting-edge solutions. 
-            Let's connect and explore how we can create something extraordinary.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg" className="gap-2 bg-white text-blue-600 hover:bg-gray-100">
-              <Mail className="w-5 h-5" />
-              Get In Touch
-            </Button>
-            <Button size="lg" variant="outline" className="gap-2 border-white text-white hover:bg-white/10">
-              <Calendar className="w-5 h-5" />
-              Schedule a Call
-            </Button>
+      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Let's Work Together</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full mb-4"></div>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              Ready to bring your ideas to life? Let's discuss your next project.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="bg-gradient-to-br from-blue-500 to-purple-600 text-white border-0">
+              <CardHeader>
+                <CardTitle className="text-white">Get In Touch</CardTitle>
+                <CardDescription className="text-blue-100">
+                  I'm always interested in hearing about new opportunities and exciting projects.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <Mail className="w-5 h-5" />
+                  <span>dhruvin.patel@example.com</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Phone className="w-5 h-5" />
+                  <span>+1 (555) 123-4567</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <MapPin className="w-5 h-5" />
+                  <span>San Francisco, CA</span>
+                </div>
+                <div className="flex space-x-4 pt-4">
+                  <Button variant="secondary" size="icon" className="rounded-full">
+                    <Github className="w-4 h-4" />
+                  </Button>
+                  <Button variant="secondary" size="icon" className="rounded-full">
+                    <Linkedin className="w-4 h-4" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white dark:bg-gray-800">
+              <CardHeader>
+                <CardTitle className="text-gray-900 dark:text-white">Quick Message</CardTitle>
+                <CardDescription>Send me a message and I'll get back to you within 24 hours.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name</label>
+                  <input 
+                    type="text" 
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" 
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                  <input 
+                    type="email" 
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" 
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                  <textarea 
+                    rows={4}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white" 
+                    placeholder="Tell me about your project..."
+                  ></textarea>
+                </div>
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                  Send Message
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className={`py-12 px-6 border-t ${
-        isDark ? 'border-gray-700 bg-gray-900/50' : 'border-gray-200 bg-gray-50/50'
-      }`}>
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-center md:text-left">
-              <p className="font-semibold mb-2">Dhruvinkumar Patel</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                © 2025 All rights reserved. Built with React & Tailwind CSS
-              </p>
+      <footer className="py-8 bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex items-center justify-center space-x-2 mb-4">
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">DP</span>
             </div>
-            <div className="flex gap-4">
-              <Button variant="ghost" size="sm" className="gap-2">
-                <Github className="w-4 h-4" />
-                GitHub
-              </Button>
-              <Button variant="ghost" size="sm" className="gap-2">
-                <Linkedin className="w-4 h-4" />
-                LinkedIn
-              </Button>
-              <Button variant="ghost" size="sm" className="gap-2" onClick={() => navigate('/desktop')}>
-                <Monitor className="w-4 h-4" />
-                DhruvOS
-              </Button>
-            </div>
+            <span className="font-bold text-xl">Dhruvinkumar Patel</span>
           </div>
+          <p className="text-gray-400">
+            © 2024 Dhruvinkumar Patel. All rights reserved. Built with ❤️ and cutting-edge technology.
+          </p>
         </div>
       </footer>
     </div>
