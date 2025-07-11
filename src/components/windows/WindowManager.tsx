@@ -19,7 +19,7 @@ interface WindowManagerProps {
 }
 
 const WindowManager = ({ theme }: WindowManagerProps) => {
-  const { windows } = useWindowManager();
+  const { windows, closeWindow, minimizeWindow, focusWindow } = useWindowManager();
 
   const renderWindowContent = (type: string, windowId: string) => {
     switch (type) {
@@ -99,7 +99,14 @@ const WindowManager = ({ theme }: WindowManagerProps) => {
       {windows.map((window) => (
         <Window
           key={window.id}
-          window={window}
+          id={window.id}
+          title={window.title}
+          isActive={window.isActive}
+          isMinimized={window.isMinimized}
+          onClose={() => closeWindow(window.id)}
+          onMinimize={() => minimizeWindow(window.id)}
+          onMaximize={() => {}}
+          onFocus={() => focusWindow(window.id)}
           theme={theme}
         >
           {renderWindowContent(window.type, window.id)}
