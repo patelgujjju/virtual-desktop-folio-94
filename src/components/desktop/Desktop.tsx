@@ -38,8 +38,8 @@ const Desktop = () => {
 
   return (
     <WindowManagerProvider>
-      <div className={`h-screen ${getDesktopBackground()} relative overflow-hidden ${theme === 'retro' ? 'pixelated' : ''}`}>
-        {/* Background Image - Using a dark forest/nature image */}
+      <div className={`h-screen w-full ${getDesktopBackground()} relative overflow-hidden ${theme === 'retro' ? 'pixelated' : ''}`}>
+        {/* Background Image - Responsive */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -50,8 +50,10 @@ const Desktop = () => {
         {/* Background Overlay */}
         <div className={`absolute inset-0 ${getBackgroundOverlay()}`} />
 
-        {/* Desktop Icons */}
-        <DesktopIcons theme={theme} />
+        {/* Desktop Icons - Hidden on mobile */}
+        <div className="hidden sm:block">
+          <DesktopIcons theme={theme} />
+        </div>
 
         {/* Window Manager */}
         <WindowManager theme={theme} />

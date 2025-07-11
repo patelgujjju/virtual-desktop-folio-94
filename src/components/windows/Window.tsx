@@ -22,10 +22,22 @@ const Window = ({ window, children, theme = 'dark' }: WindowProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const [isResizing, setIsResizing] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
   const windowRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const handleMouseDown = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget || (e.target as HTMLElement).classList.contains('window-header')) {
+    if (!isMobile && (e.target === e.currentTarget || (e.target as HTMLElement).classList.contains('window-header'))) {
       setIsDragging(true);
       setDragOffset({
         x: e.clientX - window.position.x,
@@ -52,7 +64,7 @@ const Window = ({ window, children, theme = 'dark' }: WindowProps) => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (isDragging && !window.isMaximized) {
+      if (isDragging && !window.isMaximized && !isMobile) {
         const newX = Math.max(0, Math.min(e.clientX - dragOffset.x, globalThis.window.innerWidth - window.size.width));
         const newY = Math.max(0, Math.min(e.clientY - dragOffset.y, globalThis.window.innerHeight - window.size.height - 48));
         
@@ -74,7 +86,7 @@ const Window = ({ window, children, theme = 'dark' }: WindowProps) => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging, isResizing, window.id, window.isMaximized, dragOffset, updateWindowPosition, window.size]);
+  }, [isDragging, isResizing, window.id, window.isMaximized, dragOffset, updateWindowPosition, window.size, isMobile]);
 
   if (window.isMinimized) {
     return null;
@@ -102,43 +114,56 @@ const Window = ({ window, children, theme = 'dark' }: WindowProps) => {
     }
   };
 
+  // Mobile: Full screen windows
+  const mobileStyle = isMobile ? {
+    left: 0,
+    top: 0,
+    width: '100vw',
+    height: 'calc(100vh - 48px)', // Account for taskbar
+    transform: 'none'
+  } : {
+    left: window.position.x,
+    top: window.position.y,
+    width: window.size.width,
+    height: window.size.height,
+    transform: window.isMaximized ? 'none' : undefined
+  };
+
   return (
     <div
       ref={windowRef}
-      className={`absolute rounded-lg overflow-hidden border ${getWindowStyle()} ${theme === 'retro' ? 'rounded-none' : ''}`}
+      className={`absolute ${isMobile ? 'rounded-none' : 'rounded-lg'} overflow-hidden border ${getWindowStyle()} ${theme === 'retro' ? 'rounded-none' : ''}`}
       style={{
-        left: window.position.x,
-        top: window.position.y,
-        width: window.size.width,
-        height: window.size.height,
-        zIndex: window.zIndex,
-        transform: window.isMaximized ? 'none' : undefined
+        ...mobileStyle,
+        zIndex: window.zIndex
       }}
       onClick={() => focusWindow(window.id)}
     >
       {/* Window Header - Always visible */}
       <div
-        className={`window-header h-10 flex items-center justify-between px-4 cursor-move relative z-10 ${getHeaderStyle()}`}
+        className={`window-header h-10 sm:h-10 flex items-center justify-between px-2 sm:px-4 ${!isMobile ? 'cursor-move' : ''} relative z-10 ${getHeaderStyle()}`}
         onMouseDown={handleMouseDown}
-        onDoubleClick={() => maximizeWindow(window.id)}
+        onDoubleClick={() => !isMobile && maximizeWindow(window.id)}
       >
-        <span className="text-sm font-medium truncate">
+        <span className="text-xs sm:text-sm font-medium truncate">
           {window.title}
         </span>
         
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1 sm:space-x-2">
           <button
             onClick={handleMinimize}
             className={`w-3 h-3 rounded-full transition-colors ${theme === 'retro' ? 'bg-gray-300 hover:bg-gray-200 border border-gray-500' : 'bg-yellow-500 hover:bg-yellow-600'}`}
           >
             {theme === 'retro' ? <Minus className="w-2 h-2 text-black mx-auto" /> : <Minus className="w-2 h-2 text-yellow-800 mx-auto" />}
           </button>
-          <button
-            onClick={handleMaximize}
-            className={`w-3 h-3 rounded-full transition-colors ${theme === 'retro' ? 'bg-gray-300 hover:bg-gray-200 border border-gray-500' : 'bg-green-500 hover:bg-green-600'}`}
-          >
-            {theme === 'retro' ? <Square className="w-2 h-2 text-black mx-auto" /> : <Square className="w-2 h-2 text-green-800 mx-auto" />}
-          </button>
+          {!isMobile && (
+            <button
+              onClick={handleMaximize}
+              className={`w-3 h-3 rounded-full transition-colors ${theme === 'retro' ? 'bg-gray-300 hover:bg-gray-200 border border-gray-500' : 'bg-green-500 hover:bg-green-600'}`}
+            >
+              {theme === 'retro' ? <Square className="w-2 h-2 text-black mx-auto" /> : <Square className="w-2 h-2 text-green-800 mx-auto" />}
+            </button>
+          )}
           <button
             onClick={handleClose}
             className={`w-3 h-3 rounded-full transition-colors ${theme === 'retro' ? 'bg-gray-300 hover:bg-gray-200 border border-gray-500' : 'bg-red-500 hover:bg-red-600'}`}
