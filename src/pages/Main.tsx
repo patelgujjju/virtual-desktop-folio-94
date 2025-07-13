@@ -119,19 +119,19 @@ const Main = () => {
               <a href="#contact" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
             </div>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsDark(!isDark)}
-                className="rounded-full"
+                className="rounded-full flex-shrink-0"
               >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </Button>
-              <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+              <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm px-2 sm:px-4 py-2 flex-shrink-0">
                 <a href="/desktop">
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  Try DhruvOS
+                  <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                  <span className="hidden xs:inline">Try </span>DhruvOS
                 </a>
               </Button>
             </div>
@@ -454,17 +454,62 @@ const Main = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">DP</span>
+      <footer className="py-12 bg-gray-900 dark:bg-gray-950 text-white border-t border-gray-800 dark:border-gray-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div className="md:col-span-2">
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">DP</span>
+                </div>
+                <span className="font-bold text-xl text-white">Dhruvinkumar Patel</span>
+              </div>
+              <p className="text-gray-300 dark:text-gray-400 mb-4 max-w-md">
+                AI/ML Engineer & Full Stack Developer passionate about creating intelligent solutions 
+                that bridge cutting-edge technology with practical applications.
+              </p>
+              <div className="flex space-x-4">
+                <Button variant="ghost" size="icon" className="rounded-full bg-gray-800 dark:bg-gray-800 hover:bg-gray-700 dark:hover:bg-gray-700 text-gray-300 hover:text-white">
+                  <Github className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="icon" className="rounded-full bg-gray-800 dark:bg-gray-800 hover:bg-gray-700 dark:hover:bg-gray-700 text-gray-300 hover:text-white">
+                  <Linkedin className="w-4 h-4" />
+                </Button>
+                <Button variant="ghost" size="icon" className="rounded-full bg-gray-800 dark:bg-gray-800 hover:bg-gray-700 dark:hover:bg-gray-700 text-gray-300 hover:text-white">
+                  <Mail className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
-            <span className="font-bold text-xl">Dhruvinkumar Patel</span>
+            
+            <div>
+              <h3 className="font-semibold text-white mb-4">Quick Links</h3>
+              <div className="space-y-2">
+                <a href="#about" className="block text-gray-300 dark:text-gray-400 hover:text-white transition-colors">About</a>
+                <a href="#skills" className="block text-gray-300 dark:text-gray-400 hover:text-white transition-colors">Skills</a>
+                <a href="#projects" className="block text-gray-300 dark:text-gray-400 hover:text-white transition-colors">Projects</a>
+                <a href="#experience" className="block text-gray-300 dark:text-gray-400 hover:text-white transition-colors">Experience</a>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="font-semibold text-white mb-4">Experience</h3>
+              <Button asChild className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 mb-3">
+                <a href="/desktop">
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Try DhruvOS
+                </a>
+              </Button>
+              <p className="text-sm text-gray-300 dark:text-gray-400">
+                Experience my portfolio in a unique desktop environment
+              </p>
+            </div>
           </div>
-          <p className="text-gray-400">
-            © 2024 Dhruvinkumar Patel. All rights reserved. Built with ❤️ and cutting-edge technology.
-          </p>
+          
+          <div className="pt-8 border-t border-gray-800 dark:border-gray-700 text-center">
+            <p className="text-gray-400 dark:text-gray-500">
+              © 2024 Dhruvinkumar Patel. All rights reserved. Built with ❤️ and cutting-edge technology.
+            </p>
+          </div>
         </div>
       </footer>
     </div>
