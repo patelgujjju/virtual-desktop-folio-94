@@ -26,7 +26,7 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
     }
     return theme === 'light' 
       ? 'bg-white/95 backdrop-blur-xl border-t border-gray-200 shadow-lg' 
-      : 'bg-black/95 backdrop-blur-xl border-t border-gray-700 shadow-lg';
+      : 'bg-gray-900/95 backdrop-blur-xl border-t border-gray-600 shadow-lg text-white';
   };
 
   const getStartMenuStyle = () => {
@@ -35,7 +35,16 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
     }
     return theme === 'light' 
       ? 'bg-white/95 backdrop-blur-xl border border-gray-200 shadow-2xl' 
-      : 'bg-gray-900/95 backdrop-blur-xl border border-gray-700 shadow-2xl';
+      : 'bg-gray-800/95 backdrop-blur-xl border border-gray-600 shadow-2xl text-white';
+  };
+
+  const getButtonStyle = () => {
+    if (theme === 'retro') {
+      return 'hover:bg-gray-300 text-black';
+    }
+    return theme === 'light' 
+      ? 'hover:bg-blue-500/10 text-gray-800' 
+      : 'hover:bg-gray-700/50 text-gray-100';
   };
 
   const quickApps = [
@@ -56,7 +65,7 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
             variant="ghost"
             size="sm"
             onClick={() => setShowStartMenu(!showStartMenu)}
-            className={`p-2 hover:bg-blue-500/10 transition-all duration-200 ${theme === 'retro' ? 'hover:bg-gray-300' : ''}`}
+            className={`p-2 transition-all duration-200 ${getButtonStyle()}`}
           >
             {showStartMenu ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
@@ -66,7 +75,7 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
             variant="ghost"
             size="sm"
             onClick={() => navigate('/main')}
-            className={`hidden sm:flex items-center space-x-2 px-3 py-2 hover:bg-gradient-to-r hover:from-blue-500/10 hover:to-purple-500/10 transition-all duration-200 ${theme === 'retro' ? 'hover:bg-gray-300' : ''}`}
+            className={`hidden sm:flex items-center space-x-2 px-3 py-2 transition-all duration-200 ${getButtonStyle()}`}
           >
             <Sparkles className="w-4 h-4" />
             <span className="text-sm">Portfolio</span>
@@ -80,8 +89,12 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
                 variant="ghost"
                 size="sm"
                 className={`px-3 py-1 text-xs max-w-32 truncate transition-all duration-200 ${
-                  window.isActive ? 'bg-blue-500/20 border-b-2 border-blue-500' : 'hover:bg-gray-500/10'
-                } ${theme === 'retro' ? 'hover:bg-gray-300' : ''}`}
+                  window.isActive 
+                    ? 'bg-blue-500/20 border-b-2 border-blue-500' 
+                    : theme === 'dark' 
+                      ? 'hover:bg-gray-700/50 text-gray-100' 
+                      : 'hover:bg-gray-500/10'
+                } ${theme === 'retro' ? 'hover:bg-gray-300 text-black' : ''}`}
               >
                 {window.title}
               </Button>
@@ -92,12 +105,20 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
         {/* System Tray */}
         <div className="flex items-center space-x-3 text-sm">
           {/* Theme Switcher - Hidden on mobile */}
-          <div className="hidden sm:flex items-center space-x-1 bg-gray-100 dark:bg-gray-800 rounded-full p-1">
+          <div className={`hidden sm:flex items-center space-x-1 rounded-full p-1 ${
+            theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'
+          }`}>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => onThemeChange('light')}
-              className={`p-1 rounded-full transition-all duration-200 ${theme === 'light' ? 'bg-white shadow-md' : 'hover:bg-gray-200 dark:hover:bg-gray-700'} ${theme === 'retro' ? 'hover:bg-gray-300' : ''}`}
+              className={`p-1 rounded-full transition-all duration-200 ${
+                theme === 'light' 
+                  ? 'bg-white shadow-md text-gray-800' 
+                  : theme === 'dark'
+                    ? 'hover:bg-gray-700 text-gray-300'
+                    : 'hover:bg-gray-200'
+              }`}
             >
               <Sun className="w-4 h-4" />
             </Button>
@@ -105,7 +126,11 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
               variant="ghost"
               size="sm"
               onClick={() => onThemeChange('dark')}
-              className={`p-1 rounded-full transition-all duration-200 ${theme === 'dark' ? 'bg-gray-900 text-white shadow-md' : 'hover:bg-gray-200 dark:hover:bg-gray-700'} ${theme === 'retro' ? 'hover:bg-gray-300' : ''}`}
+              className={`p-1 rounded-full transition-all duration-200 ${
+                theme === 'dark' 
+                  ? 'bg-gray-900 text-white shadow-md' 
+                  : 'hover:bg-gray-200 text-gray-700'
+              }`}
             >
               <Moon className="w-4 h-4" />
             </Button>
@@ -113,21 +138,33 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
               variant="ghost"
               size="sm"
               onClick={() => onThemeChange('retro')}
-              className={`p-1 rounded-full transition-all duration-200 ${theme === 'retro' ? 'bg-teal-500 text-white shadow-md' : 'hover:bg-gray-200 dark:hover:bg-gray-700'} ${theme === 'retro' ? 'hover:bg-gray-300' : ''}`}
+              className={`p-1 rounded-full transition-all duration-200 ${
+                theme === 'retro' 
+                  ? 'bg-teal-500 text-white shadow-md' 
+                  : theme === 'dark'
+                    ? 'hover:bg-gray-700 text-gray-300'
+                    : 'hover:bg-gray-200'
+              }`}
             >
               <Palette className="w-4 h-4" />
             </Button>
           </div>
 
-          <div className="hidden sm:flex items-center space-x-2 text-xs opacity-70">
+          <div className={`hidden sm:flex items-center space-x-2 text-xs ${
+            theme === 'dark' ? 'text-gray-300' : 'opacity-70'
+          }`}>
             <Wifi className="w-4 h-4" />
             <Volume2 className="w-4 h-4" />
             <Battery className="w-4 h-4" />
           </div>
           
-          <div className="flex flex-col items-end text-xs leading-tight">
+          <div className={`flex flex-col items-end text-xs leading-tight ${
+            theme === 'dark' ? 'text-gray-100' : ''
+          }`}>
             <span className="font-medium">{formatTime(time)}</span>
-            <span className="hidden sm:block text-xs opacity-70">{time.toLocaleDateString()}</span>
+            <span className={`hidden sm:block text-xs ${
+              theme === 'dark' ? 'text-gray-400' : 'opacity-70'
+            }`}>{time.toLocaleDateString()}</span>
           </div>
         </div>
       </div>
@@ -135,13 +172,17 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
       {/* Start Menu */}
       {showStartMenu && (
         <div className={`fixed bottom-12 left-4 w-72 sm:w-80 ${getStartMenuStyle()} rounded-xl p-4 z-50 animate-in slide-in-from-bottom-2 duration-200`}>
-          <div className="flex items-center space-x-3 mb-4 pb-4 border-b border-gray-200 dark:border-gray-700">
+          <div className={`flex items-center space-x-3 mb-4 pb-4 border-b ${
+            theme === 'dark' ? 'border-gray-600' : 'border-gray-200'
+          }`}>
             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
               <span className="text-white font-bold">DP</span>
             </div>
             <div>
               <div className="font-semibold">Dhruvinkumar Patel</div>
-              <div className="text-xs text-gray-500">AI/ML Engineer</div>
+              <div className={`text-xs ${
+                theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+              }`}>AI/ML Engineer</div>
             </div>
           </div>
 
@@ -150,7 +191,11 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
               <Button
                 key={app.type}
                 variant="ghost"
-                className="flex flex-col items-center p-3 h-auto hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 transition-all duration-200 rounded-xl"
+                className={`flex flex-col items-center p-3 h-auto transition-all duration-200 rounded-xl ${
+                  theme === 'dark'
+                    ? 'hover:bg-blue-900/20 hover:from-blue-900/20 hover:to-purple-900/20'
+                    : 'hover:bg-gradient-to-br hover:from-blue-50 hover:to-purple-50'
+                }`}
                 onClick={() => {
                   openWindow(app.type, app.title, app.type);
                   setShowStartMenu(false);
@@ -165,7 +210,11 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
           <div className="space-y-2">
             <Button
               variant="ghost"
-              className="w-full justify-start hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 transition-all duration-200 rounded-lg"
+              className={`w-full justify-start transition-all duration-200 rounded-lg ${
+                theme === 'dark'
+                  ? 'hover:bg-blue-900/20 hover:from-blue-900/20 hover:to-purple-900/20'
+                  : 'hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50'
+              }`}
               onClick={() => {
                 navigate('/main');
                 setShowStartMenu(false);
@@ -176,7 +225,11 @@ const Taskbar = ({ time, theme, onThemeChange }: TaskbarProps) => {
             </Button>
             <Button
               variant="ghost"
-              className="w-full justify-start hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 transition-all duration-200 rounded-lg"
+              className={`w-full justify-start transition-all duration-200 rounded-lg ${
+                theme === 'dark'
+                  ? 'hover:bg-blue-900/20 hover:from-blue-900/20 hover:to-purple-900/20'
+                  : 'hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50'
+              }`}
               onClick={() => setShowStartMenu(false)}
             >
               <Settings className="w-4 h-4 mr-2" />
