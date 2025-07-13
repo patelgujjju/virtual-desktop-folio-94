@@ -1,12 +1,12 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Terminal } from 'lucide-react';
 
 interface TerminalAppProps {
   theme: 'light' | 'dark' | 'retro';
+  onClose?: () => void;
 }
 
-const TerminalApp = ({ theme }: TerminalAppProps) => {
+const TerminalApp = ({ theme, onClose }: TerminalAppProps) => {
   const [history, setHistory] = useState<Array<{ command: string; output: string; timestamp: Date }>>([]);
   const [currentCommand, setCurrentCommand] = useState('');
   const [commandHistory, setCommandHistory] = useState<string[]>(['help']);
@@ -193,7 +193,12 @@ drwxr-xr-x  2 dhruvin dhruvin 4096 Jan 11 12:00 experience/
                 ||     ||`;
     },
 
-    exit: () => 'Goodbye! Thanks for visiting my terminal.'
+    exit: () => {
+      if (onClose) {
+        setTimeout(() => onClose(), 500);
+      }
+      return 'Goodbye! Thanks for visiting my terminal.';
+    }
   };
 
   const executeCommand = (cmd: string) => {

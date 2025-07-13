@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -39,15 +38,27 @@ const Main = () => {
     }
   }, [isDark]);
 
-  const skills = [
-    { name: 'Python', level: 95, color: 'bg-blue-500' },
-    { name: 'Machine Learning', level: 90, color: 'bg-green-500' },
-    { name: 'Deep Learning', level: 85, color: 'bg-purple-500' },
-    { name: 'React', level: 88, color: 'bg-cyan-500' },
-    { name: 'Node.js', level: 82, color: 'bg-yellow-500' },
-    { name: 'MongoDB', level: 80, color: 'bg-emerald-500' },
-    { name: 'AWS', level: 75, color: 'bg-orange-500' },
-    { name: 'Docker', level: 78, color: 'bg-indigo-500' }
+  const skillCategories = [
+    {
+      title: 'Languages & Tools',
+      skills: ['Python', 'C', 'C++', 'JavaScript', 'HTML', 'CSS', 'SQL', 'Tableau']
+    },
+    {
+      title: 'Frameworks & Libraries',
+      skills: ['TensorFlow', 'PyTorch', 'scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'OpenCV', 'Node.js', 'Express.js']
+    },
+    {
+      title: 'AI/ML Technologies',
+      skills: ['RAG (Retrieval-Augmented Generation)', 'LLM Fine-Tuning', 'NLP', 'Computer Vision', 'Deep Learning', 'Object Detection (YOLOv3)', 'Multi-Agent AI Systems']
+    },
+    {
+      title: 'Technologies',
+      skills: ['Git', 'GitHub', 'MySQL', 'Google Colab', 'Jupyter Notebook', 'Anaconda', 'Postman', 'Three.js']
+    },
+    {
+      title: 'Soft Skills',
+      skills: ['Problem Solving', 'Critical Thinking', 'Team Collaboration', 'Leadership', 'Research-Driven Development']
+    }
   ];
 
   const projects = [
@@ -269,20 +280,25 @@ const Main = () => {
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {skills.map((skill, index) => (
-              <div key={index} className="group">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="font-semibold text-gray-900 dark:text-white">{skill.name}</span>
-                  <span className="text-sm text-gray-600 dark:text-gray-300">{skill.level}%</span>
-                </div>
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
-                  <div 
-                    className={`h-full ${skill.color} rounded-full transition-all duration-1000 ease-out group-hover:scale-105`}
-                    style={{ width: `${skill.level}%` }}
-                  ></div>
-                </div>
-              </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {skillCategories.map((category, index) => (
+              <Card key={index} className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardHeader>
+                  <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white mb-4 text-center">
+                    {category.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {category.skills.map((skill, skillIndex) => (
+                    <div
+                      key={skillIndex}
+                      className="bg-slate-200 dark:bg-slate-700 px-4 py-2 rounded-full text-center text-sm font-medium text-gray-800 dark:text-gray-200 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors duration-200"
+                    >
+                      {skill}
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
