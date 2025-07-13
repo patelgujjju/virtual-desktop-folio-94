@@ -22,7 +22,12 @@ import {
   Zap,
   Target,
   Users,
-  TrendingUp
+  TrendingUp,
+  Cpu,
+  Globe,
+  Layers,
+  Settings,
+  Heart
 } from 'lucide-react';
 
 const Main = () => {
@@ -41,22 +46,32 @@ const Main = () => {
   const skillCategories = [
     {
       title: 'Languages & Tools',
+      icon: Code,
+      gradient: 'from-blue-500 to-purple-600',
       skills: ['Python', 'C', 'C++', 'JavaScript', 'HTML', 'CSS', 'SQL', 'Tableau']
     },
     {
       title: 'Frameworks & Libraries',
+      icon: Layers,
+      gradient: 'from-green-500 to-teal-600',
       skills: ['TensorFlow', 'PyTorch', 'scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'OpenCV', 'Node.js', 'Express.js']
     },
     {
       title: 'AI/ML Technologies',
+      icon: Brain,
+      gradient: 'from-purple-500 to-pink-600',
       skills: ['RAG (Retrieval-Augmented Generation)', 'LLM Fine-Tuning', 'NLP', 'Computer Vision', 'Deep Learning', 'Object Detection (YOLOv3)', 'Multi-Agent AI Systems']
     },
     {
-      title: 'Technologies',
+      title: 'Tools & Platforms',
+      icon: Settings,
+      gradient: 'from-orange-500 to-red-600',
       skills: ['Git', 'GitHub', 'MySQL', 'Google Colab', 'Jupyter Notebook', 'Anaconda', 'Postman', 'Three.js']
     },
     {
       title: 'Soft Skills',
+      icon: Heart,
+      gradient: 'from-pink-500 to-rose-600',
       skills: ['Problem Solving', 'Critical Thinking', 'Team Collaboration', 'Leadership', 'Research-Driven Development']
     }
   ];
@@ -139,7 +154,7 @@ const Main = () => {
               >
                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
               </Button>
-              <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm px-2 sm:px-4 py-2 flex-shrink-0">
+              <Button asChild className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-xs sm:text-sm px-2 sm:px-4 py-2 flex-shrink-0 whitespace-nowrap">
                 <a href="/desktop">
                   <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                   <span className="hidden xs:inline">Try </span>DhruvOS
@@ -278,25 +293,47 @@ const Main = () => {
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Skills & Technologies</h2>
             <div className="w-20 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+            <p className="text-lg text-gray-600 dark:text-gray-300 mt-6 max-w-3xl mx-auto">
+              A comprehensive toolkit of modern technologies and methodologies that power innovative solutions
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skillCategories.map((category, index) => (
-              <Card key={index} className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                <CardHeader>
-                  <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white mb-4 text-center">
-                    {category.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div
-                      key={skillIndex}
-                      className="bg-slate-200 dark:bg-slate-700 px-4 py-2 rounded-full text-center text-sm font-medium text-gray-800 dark:text-gray-200 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors duration-200"
-                    >
-                      {skill}
+              <Card key={index} className="group relative overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-white dark:bg-gray-900">
+                <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+                <div className={`h-1 bg-gradient-to-r ${category.gradient}`}></div>
+                
+                <CardHeader className="relative z-10">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className={`w-12 h-12 bg-gradient-to-br ${category.gradient} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <category.icon className="w-6 h-6 text-white" />
                     </div>
-                  ))}
+                    <CardTitle className="text-xl font-bold text-gray-900 dark:text-white group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                      {category.title}
+                    </CardTitle>
+                  </div>
+                </CardHeader>
+                
+                <CardContent className="relative z-10 pt-0">
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill, skillIndex) => (
+                      <Badge
+                        key={skillIndex}
+                        variant="secondary"
+                        className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-200 cursor-default text-xs px-3 py-1 font-medium border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-800">
+                    <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                      <Target className="w-4 h-4 mr-2" />
+                      <span>{category.skills.length} Technologies</span>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             ))}

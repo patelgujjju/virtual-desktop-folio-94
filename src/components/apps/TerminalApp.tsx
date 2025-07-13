@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Terminal } from 'lucide-react';
+import { Terminal, X } from 'lucide-react';
 
 interface TerminalAppProps {
   theme: 'light' | 'dark' | 'retro';
@@ -225,7 +225,7 @@ drwxr-xr-x  2 dhruvin dhruvin 4096 Jan 11 12:00 experience/
     };
 
     setHistory(prev => [...prev, newEntry]);
-    setCommandHistory(prev => [trimmedCmd, ...prev.slice(0, 49)]); // Keep last 50 commands
+    setCommandHistory(prev => [trimmedCmd, ...prev.slice(0, 49)]);
     setCurrentCommand('');
     setHistoryIndex(-1);
   };
@@ -265,7 +265,6 @@ drwxr-xr-x  2 dhruvin dhruvin 4096 Jan 11 12:00 experience/
     }
   }, []);
 
-  // Welcome message
   useEffect(() => {
     const welcomeMessage = {
       command: 'welcome',
@@ -310,9 +309,20 @@ AI/ML Engineer & Full Stack Developer
 
   return (
     <div className={`h-full ${getTerminalStyle()}`} onClick={() => inputRef.current?.focus()}>
-      <div className="flex items-center space-x-2 p-2 border-b border-gray-600">
-        <Terminal className="w-4 h-4" />
-        <span className="text-sm font-medium">Terminal</span>
+      <div className="flex items-center justify-between space-x-2 p-2 border-b border-gray-600">
+        <div className="flex items-center space-x-2">
+          <Terminal className="w-4 h-4" />
+          <span className="text-sm font-medium">Terminal</span>
+        </div>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="p-1 hover:bg-gray-700 rounded transition-colors duration-200 text-gray-400 hover:text-white"
+            aria-label="Close terminal"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        )}
       </div>
       
       <div ref={terminalRef} className="p-4 h-full overflow-y-auto text-sm">
