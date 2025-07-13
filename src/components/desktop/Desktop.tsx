@@ -50,10 +50,8 @@ const Desktop = () => {
         {/* Background Overlay */}
         <div className={`absolute inset-0 ${getBackgroundOverlay()}`} />
 
-        {/* Desktop Icons - Hidden on mobile */}
-        <div className="hidden sm:block">
-          <DesktopIcons theme={theme} />
-        </div>
+        {/* Desktop Icons - Now visible on all devices */}
+        <DesktopIcons theme={theme} />
 
         {/* Window Manager */}
         <WindowManager theme={theme} />

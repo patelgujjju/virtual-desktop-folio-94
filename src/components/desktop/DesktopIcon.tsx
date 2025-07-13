@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { LucideIcon } from 'lucide-react';
 
@@ -15,6 +14,7 @@ const DesktopIcon = ({ name, icon: Icon, position, onClick, onPositionChange, th
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [isSelected, setIsSelected] = useState(false);
+  const [lastTouchTime, setLastTouchTime] = useState(0);
   const dragRef = useRef<HTMLDivElement>(null);
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -29,6 +29,50 @@ const DesktopIcon = ({ name, icon: Icon, position, onClick, onPositionChange, th
       x: e.clientX - position.x,
       y: e.clientY - position.y
     });
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const currentTime = Date.now();
+    const tapLength = currentTime - lastTouchTime;
+    
+    // Double tap detection (within 300ms)
+    if (tapLength < 300 && tapLength > 0) {
+      e.preventDefault();
+      onClick();
+      return;
+    }
+    
+    setLastTouchTime(currentTime);
+    setIsSelected(true);
+    
+    const touch = e.touches[0];
+    setDragOffset({
+      x: touch.clientX - position.x,
+      y: touch.clientY - position.y
+    });
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) {
+      setIsDragging(true);
+    }
+    
+    const touch = e.touches[0];
+    const newX = touch.clientX - dragOffset.x;
+    const newY = touch.clientY - dragOffset.y;
+    
+    // Keep within screen bounds
+    const maxX = window.innerWidth - 100;
+    const maxY = window.innerHeight - 150;
+    
+    onPositionChange({
+      x: Math.max(0, Math.min(newX, maxX)),
+      y: Math.max(0, Math.min(newY, maxY))
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
   };
 
   React.useEffect(() => {
@@ -71,7 +115,7 @@ const DesktopIcon = ({ name, icon: Icon, position, onClick, onPositionChange, th
   }, [isDragging, dragOffset, onPositionChange]);
 
   const getIconStyle = () => {
-    const baseStyle = "w-16 h-16 rounded-lg flex items-center justify-center transition-all duration-200 shadow-lg";
+    const baseStyle = "w-12 h-12 sm:w-16 sm:h-16 rounded-lg flex items-center justify-center transition-all duration-200 shadow-lg";
     
     switch (theme) {
       case 'light':
@@ -84,7 +128,7 @@ const DesktopIcon = ({ name, icon: Icon, position, onClick, onPositionChange, th
   };
 
   const getTextStyle = () => {
-    const baseStyle = "text-xs text-center max-w-20 leading-tight font-medium px-1 py-0.5 rounded";
+    const baseStyle = "text-xs text-center max-w-16 sm:max-w-20 leading-tight font-medium px-1 py-0.5 rounded";
     
     switch (theme) {
       case 'light':
@@ -123,14 +167,17 @@ const DesktopIcon = ({ name, icon: Icon, position, onClick, onPositionChange, th
   return (
     <div
       ref={dragRef}
-      className={`absolute cursor-pointer group select-none ${isDragging ? 'z-50' : ''}`}
+      className={`absolute cursor-pointer group select-none touch-manipulation ${isDragging ? 'z-50' : ''}`}
       style={{ left: position.x, top: position.y }}
       onMouseDown={handleMouseDown}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       onClick={(e) => e.stopPropagation()}
     >
       <div className={`flex flex-col items-center space-y-1 p-2 rounded-lg transition-all duration-200 ${getSelectionStyle()}`}>
         <div className={getIconStyle()}>
-          <Icon className={`w-8 h-8 ${getIconColor()}`} strokeWidth={1.5} />
+          <Icon className={`w-6 h-6 sm:w-8 sm:h-8 ${getIconColor()}`} strokeWidth={1.5} />
         </div>
         <span className={getTextStyle()}>
           {name}
